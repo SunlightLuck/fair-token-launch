@@ -150,8 +150,8 @@ contract Token is ERC20, Ownable {
         uint256 tokenAmountDesired = (_totalSupply * _lpPercent) / 10000;
         uint256 usdtAmountDesired = IERC20(USDT).balanceOf(address(this));
 
-        _approve(address(this), ROUTER, type(uint256).max);
-        IERC20(USDT).forceApprove(ROUTER, type(uint256).max);
+        _approve(address(this), ROUTER, tokenAmountDesired);
+        IERC20(USDT).forceApprove(ROUTER, usdtAmountDesired);
 
         IUniswapV2Router(ROUTER).addLiquidity(
             USDT,
