@@ -1,13 +1,51 @@
-# Sample Hardhat Project
+# Fair Launch Token
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
+### Constructor
 
-Try running some of the following tasks:
+#### `constructor(uint256 amount, uint256 startDate, uint256 endDate, uint256 lpPercent, uint256 ticks)`
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat ignition deploy ./ignition/modules/Lock.ts
-```
+- amount: The amount of token to be minted
+- startDate: The start date of the sale
+- endDate: The end date of the sale
+- lpPercent: The percent of the token to be used for LP
+- ticks: The total ticks of the sale
+
+### Read Functions
+
+#### `getCurrentTokenForUser(address user)`
+
+Returns the minted token amount for the user in the current tick
+
+#### `getTokenPerTick()`
+
+Returns the assigned token account per tick
+
+#### `getCurrentTickIndex()`
+
+Returns the current tick
+
+### Write Functions
+
+#### `setTicks(uint256 ticks) onlyOwner`
+
+Updates the total ticks
+
+- ticks: The total ticks of the sale
+
+#### `enter(uint256 _usdtAmount)`
+
+Adds the user with USDT deposit in the current tick
+
+- _usdtAmount: The USDT deposit amount
+
+#### `exit()`
+
+Removes the user from the sale with returning the USDT deposit
+
+#### `claim()`
+
+Sends the mined token amount to the user after the sale finished
+
+#### `createPair()`
+
+Creates a LP with the token and USDT after the sale finished
